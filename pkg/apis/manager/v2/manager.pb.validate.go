@@ -1758,6 +1758,255 @@ var _ interface {
 	ErrorName() string
 } = GetSchedulerRequestValidationError{}
 
+// Validate checks the field values on GetSchedulersRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetSchedulersRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSchedulersRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetSchedulersRequestMultiError, or nil if none found.
+func (m *GetSchedulersRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSchedulersRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if _, ok := SourceType_name[int32(m.GetSourceType())]; !ok {
+		err := GetSchedulersRequestValidationError{
+			field:  "SourceType",
+			reason: "value must be one of the defined enum values",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return GetSchedulersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSchedulersRequestMultiError is an error wrapping multiple validation
+// errors returned by GetSchedulersRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetSchedulersRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSchedulersRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSchedulersRequestMultiError) AllErrors() []error { return m }
+
+// GetSchedulersRequestValidationError is the validation error returned by
+// GetSchedulersRequest.Validate if the designated constraints aren't met.
+type GetSchedulersRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSchedulersRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSchedulersRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSchedulersRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSchedulersRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSchedulersRequestValidationError) ErrorName() string {
+	return "GetSchedulersRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSchedulersRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSchedulersRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSchedulersRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSchedulersRequestValidationError{}
+
+// Validate checks the field values on GetSchedulersResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetSchedulersResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSchedulersResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetSchedulersResponseMultiError, or nil if none found.
+func (m *GetSchedulersResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSchedulersResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetSchedulers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetSchedulersResponseValidationError{
+						field:  fmt.Sprintf("Schedulers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetSchedulersResponseValidationError{
+						field:  fmt.Sprintf("Schedulers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetSchedulersResponseValidationError{
+					field:  fmt.Sprintf("Schedulers[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetSchedulersResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSchedulersResponseMultiError is an error wrapping multiple validation
+// errors returned by GetSchedulersResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetSchedulersResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSchedulersResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSchedulersResponseMultiError) AllErrors() []error { return m }
+
+// GetSchedulersResponseValidationError is the validation error returned by
+// GetSchedulersResponse.Validate if the designated constraints aren't met.
+type GetSchedulersResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSchedulersResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSchedulersResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSchedulersResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSchedulersResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSchedulersResponseValidationError) ErrorName() string {
+	return "GetSchedulersResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSchedulersResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSchedulersResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSchedulersResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSchedulersResponseValidationError{}
+
 // Validate checks the field values on UpdateSchedulerRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

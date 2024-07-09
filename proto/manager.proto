@@ -31,6 +31,9 @@ enum SourceType {
 
   // SeedPeer service.
   SEED_PEER_SOURCE = 2;
+
+  // Trainer service.
+  TRAINER_SOURCE = 3;
 }
 
 // SeedPeerCluster represents cluster of seed peer.
@@ -193,6 +196,18 @@ message GetSchedulerRequest {
   string ip = 4;
 }
 
+// GetSchedulersRequest represents request of GetSchedulers.
+message GetSchedulersRequest {
+  // Request source type.
+  SourceType source_type = 1 [(validate.rules).enum.defined_only = true];
+}
+
+// GetSchedulersResponse represents response of GetSchedulers.
+message GetSchedulersResponse {
+  // Schedulers to which the source service belongs.
+  repeated Scheduler schedulers = 1;
+}
+
 // UpdateSchedulerRequest represents request of UpdateScheduler.
 message UpdateSchedulerRequest {
   // Request source type.
@@ -331,6 +346,9 @@ service Manager {
 
   // Get Scheduler and Scheduler cluster configuration.
   rpc GetScheduler(GetSchedulerRequest)returns(Scheduler);
+
+  // Get Schedulers configuration.
+  rpc GetSchedulers(GetSchedulersRequest)returns(GetSchedulersResponse);
 
   // Update scheduler configuration.
   rpc UpdateScheduler(UpdateSchedulerRequest) returns(Scheduler);
