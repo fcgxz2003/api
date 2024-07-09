@@ -31,6 +31,8 @@ type ManagerClient interface {
 	UpdateSeedPeer(ctx context.Context, in *UpdateSeedPeerRequest, opts ...grpc.CallOption) (*SeedPeer, error)
 	// Get Scheduler and Scheduler cluster configuration.
 	GetScheduler(ctx context.Context, in *GetSchedulerRequest, opts ...grpc.CallOption) (*Scheduler, error)
+	// Get Schedulers configuration.
+	GetSchedulers(ctx context.Context, in *GetSchedulersRequest, opts ...grpc.CallOption) (*GetSchedulersResponse, error)
 	// Update scheduler configuration.
 	UpdateScheduler(ctx context.Context, in *UpdateSchedulerRequest, opts ...grpc.CallOption) (*Scheduler, error)
 	// List acitve schedulers configuration.
@@ -85,6 +87,15 @@ func (c *managerClient) UpdateSeedPeer(ctx context.Context, in *UpdateSeedPeerRe
 func (c *managerClient) GetScheduler(ctx context.Context, in *GetSchedulerRequest, opts ...grpc.CallOption) (*Scheduler, error) {
 	out := new(Scheduler)
 	err := c.cc.Invoke(ctx, "/manager.Manager/GetScheduler", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *managerClient) GetSchedulers(ctx context.Context, in *GetSchedulersRequest, opts ...grpc.CallOption) (*GetSchedulersResponse, error) {
+	out := new(GetSchedulersResponse)
+	err := c.cc.Invoke(ctx, "/manager.Manager/GetSchedulers", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -191,6 +202,8 @@ type ManagerServer interface {
 	UpdateSeedPeer(context.Context, *UpdateSeedPeerRequest) (*SeedPeer, error)
 	// Get Scheduler and Scheduler cluster configuration.
 	GetScheduler(context.Context, *GetSchedulerRequest) (*Scheduler, error)
+	// Get Schedulers configuration.
+	GetSchedulers(context.Context, *GetSchedulersRequest) (*GetSchedulersResponse, error)
 	// Update scheduler configuration.
 	UpdateScheduler(context.Context, *UpdateSchedulerRequest) (*Scheduler, error)
 	// List acitve schedulers configuration.
@@ -222,6 +235,9 @@ func (UnimplementedManagerServer) UpdateSeedPeer(context.Context, *UpdateSeedPee
 }
 func (UnimplementedManagerServer) GetScheduler(context.Context, *GetSchedulerRequest) (*Scheduler, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetScheduler not implemented")
+}
+func (UnimplementedManagerServer) GetSchedulers(context.Context, *GetSchedulersRequest) (*GetSchedulersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSchedulers not implemented")
 }
 func (UnimplementedManagerServer) UpdateScheduler(context.Context, *UpdateSchedulerRequest) (*Scheduler, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateScheduler not implemented")
@@ -324,6 +340,24 @@ func _Manager_GetScheduler_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ManagerServer).GetScheduler(ctx, req.(*GetSchedulerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Manager_GetSchedulers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSchedulersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ManagerServer).GetSchedulers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/manager.Manager/GetSchedulers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ManagerServer).GetSchedulers(ctx, req.(*GetSchedulersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -484,6 +518,10 @@ var Manager_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetScheduler",
 			Handler:    _Manager_GetScheduler_Handler,
+		},
+		{
+			MethodName: "GetSchedulers",
+			Handler:    _Manager_GetSchedulers_Handler,
 		},
 		{
 			MethodName: "UpdateScheduler",
