@@ -1,3 +1,5 @@
+d7y.io/api/v2 v2.0.131 h1:9i6EmoHRlmMv0fWbejuI6YD3pjPoGRTbLHybx9jfydU=
+d7y.io/api/v2 v2.0.131/go.mod h1:IakrltEphFvcLIQs3NVeb9PAe66MGDnd2/HMs9DKYu8=
 github.com/envoyproxy/protoc-gen-validate v1.0.4 h1:gVPz/FMfvh57HdSJQyvBtF00j8JU4zdyUgIUNhlgg0A=
 github.com/envoyproxy/protoc-gen-validate v1.0.4/go.mod h1:qys6tmnRsYrQqIhm2bvKZH4Blx/1gTIZ2UKVY1M+Yew=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
