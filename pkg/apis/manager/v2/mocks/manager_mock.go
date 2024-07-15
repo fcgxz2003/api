@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	manager "d7y.io/api/v2/pkg/apis/manager/v2"
+	manager "github.com/fcgxz2003/api/v2/pkg/apis/manager/v2"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 	metadata "google.golang.org/grpc/metadata"
@@ -81,6 +81,26 @@ func (mr *MockManagerClientMockRecorder) GetScheduler(ctx, in any, opts ...any) 
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetScheduler", reflect.TypeOf((*MockManagerClient)(nil).GetScheduler), varargs...)
+}
+
+// GetSchedulers mocks base method.
+func (m *MockManagerClient) GetSchedulers(ctx context.Context, in *manager.GetSchedulersRequest, opts ...grpc.CallOption) (*manager.GetSchedulersResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetSchedulers", varargs...)
+	ret0, _ := ret[0].(*manager.GetSchedulersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetSchedulers indicates an expected call of GetSchedulers.
+func (mr *MockManagerClientMockRecorder) GetSchedulers(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSchedulers", reflect.TypeOf((*MockManagerClient)(nil).GetSchedulers), varargs...)
 }
 
 // GetSeedPeer mocks base method.
@@ -411,6 +431,21 @@ func (m *MockManagerServer) GetScheduler(arg0 context.Context, arg1 *manager.Get
 func (mr *MockManagerServerMockRecorder) GetScheduler(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetScheduler", reflect.TypeOf((*MockManagerServer)(nil).GetScheduler), arg0, arg1)
+}
+
+// GetSchedulers mocks base method.
+func (m *MockManagerServer) GetSchedulers(arg0 context.Context, arg1 *manager.GetSchedulersRequest) (*manager.GetSchedulersResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetSchedulers", arg0, arg1)
+	ret0, _ := ret[0].(*manager.GetSchedulersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetSchedulers indicates an expected call of GetSchedulers.
+func (mr *MockManagerServerMockRecorder) GetSchedulers(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSchedulers", reflect.TypeOf((*MockManagerServer)(nil).GetSchedulers), arg0, arg1)
 }
 
 // GetSeedPeer mocks base method.

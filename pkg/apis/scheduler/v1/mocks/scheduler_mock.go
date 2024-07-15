@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	scheduler "d7y.io/api/v2/pkg/apis/scheduler/v1"
+	scheduler "github.com/fcgxz2003/api/v2/pkg/apis/scheduler/v1"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 	metadata "google.golang.org/grpc/metadata"

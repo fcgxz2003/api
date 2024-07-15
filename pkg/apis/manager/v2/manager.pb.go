@@ -22,8 +22,8 @@
 package manager
 
 import (
-	v2 "d7y.io/api/v2/pkg/apis/common/v2"
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	v2 "github.com/fcgxz2003/api/v2/pkg/apis/common/v2"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"

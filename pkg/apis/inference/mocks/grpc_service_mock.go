@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	inference "d7y.io/api/v2/pkg/apis/inference"
+	inference "github.com/fcgxz2003/api/v2/pkg/apis/inference"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 	metadata "google.golang.org/grpc/metadata"

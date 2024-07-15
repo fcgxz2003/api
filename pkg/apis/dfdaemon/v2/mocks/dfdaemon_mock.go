@@ -13,8 +13,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	common "d7y.io/api/v2/pkg/apis/common/v2"
-	dfdaemon "d7y.io/api/v2/pkg/apis/dfdaemon/v2"
+	common "github.com/fcgxz2003/api/v2/pkg/apis/common/v2"
+	dfdaemon "github.com/fcgxz2003/api/v2/pkg/apis/dfdaemon/v2"
 	gomock "go.uber.org/mock/gomock"
 	grpc "google.golang.org/grpc"
 	metadata "google.golang.org/grpc/metadata"
