@@ -3,7 +3,6 @@ module github.com/fcgxz2003/api/v2
 go 1.21
 
 require (
-	d7y.io/api/v2 v2.0.131
 	github.com/envoyproxy/protoc-gen-validate v1.0.4
 	go.uber.org/mock v0.4.0
 	google.golang.org/grpc v1.65.0
